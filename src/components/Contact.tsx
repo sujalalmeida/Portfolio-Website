@@ -40,7 +40,7 @@ const Contact = () => {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
-          message: formData.message,
+          message: `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage: ${formData.message}`,
           to_email: 'crce.9942.ce@gmail.com',
         },
         'AShNqiOI1WVY4dV3m' // replace with your EmailJS user ID (public key)
