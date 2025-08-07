@@ -114,10 +114,10 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-muted-foreground text-sm">
-              © {currentYear} Sujal Almeida. All rights reserved.
+           
             </p>
             <p className="flex items-center text-muted-foreground text-sm">
-              Built with <Heart className="h-4 w-4 text-red-500 mx-1" /> using React & Tailwind CSS
+              
             </p>
           </div>
         </div>
