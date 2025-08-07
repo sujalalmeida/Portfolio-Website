@@ -143,9 +143,9 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 1.5 }}
             >
               {[
-                { href: "https://github.com/sujal", icon: Github, label: "GitHub" },
+                { href: "https://github.com/sujalalmeida", icon: Github, label: "GitHub" },
                 { href: "https://linkedin.com/in/sujal-almeida", icon: Linkedin, label: "LinkedIn" },
-                { href: "mailto:crce.9942.ce@gmail.com", icon: Mail, label: "Email" }
+                { href: "mailto:sujalalmeida13@gmail.com", icon: Mail, label: "Email" }
               ].map((social, index) => (
                 <motion.div
                   key={social.label}
