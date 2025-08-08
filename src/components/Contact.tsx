@@ -14,6 +14,7 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,6 +27,12 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Honeypot: if filled, treat as spam and silently ignore
+    if (honeypot.trim()) {
+      setIsSubmitting(false);
+      return;
+    }
 
     // Send email using EmailJS (client-side)
     // You must install emailjs-com: npm install emailjs-com
@@ -117,7 +124,9 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
+                  <label htmlFor="name" className="sr-only">Name</label>
                   <Input
+                    id="name"
                     name="name"
                     placeholder="Your Name"
                     value={formData.name}
@@ -127,7 +136,9 @@ const Contact = () => {
                   />
                 </div>
                 <div>
+                  <label htmlFor="email" className="sr-only">Email</label>
                   <Input
+                    id="email"
                     name="email"
                     type="email"
                     placeholder="Your Email"
@@ -140,7 +151,9 @@ const Contact = () => {
               </div>
               
               <div>
+                <label htmlFor="subject" className="sr-only">Subject</label>
                 <Input
+                  id="subject"
                   name="subject"
                   placeholder="Subject"
                   value={formData.subject}
@@ -151,7 +164,9 @@ const Contact = () => {
               </div>
               
               <div>
+                <label htmlFor="message" className="sr-only">Message</label>
                 <Textarea
+                  id="message"
                   name="message"
                   placeholder="Your Message"
                   value={formData.message}
@@ -159,6 +174,20 @@ const Contact = () => {
                   required
                   rows={6}
                   className="bg-muted/50 border-border focus:border-primary resize-none"
+                />
+              </div>
+
+              {/* Honeypot field for bots */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
                 />
               </div>
               
@@ -188,8 +217,8 @@ const Contact = () => {
               <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               
               <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-center gap-4">
+                {contactInfo.map((info) => (
+                  <div key={info.label} className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
                       <info.icon className="h-5 w-5 text-primary" />
                     </div>
@@ -215,9 +244,9 @@ const Contact = () => {
               <h3 className="text-2xl font-semibold mb-6">Follow Me</h3>
               
               <div className="space-y-4">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a
-                    key={index}
+                    key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"

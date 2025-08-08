@@ -144,8 +144,8 @@ const Hero = () => {
             >
               {[
                 { href: "https://github.com/sujalalmeida", icon: Github, label: "GitHub" },
-                { href: "https://linkedin.com/in/sujal-almeida", icon: Linkedin, label: "LinkedIn" },
-                { href: "mailto:sujalalmeida13@gmail.com", icon: Mail, label: "Email" }
+                { href: "https://www.linkedin.com/in/sujal-almeida/", icon: Linkedin, label: "LinkedIn" },
+                { href: "mailto:crce.9942.ce@gmail.com", icon: Mail, label: "Email" }
               ].map((social, index) => (
                 <motion.div
                   key={social.label}

@@ -12,7 +12,7 @@ const Footer = () => {
     },
     {
       icon: Linkedin,
-      href: 'https://linkedin.com/in/sujal-almeida',
+      href: 'https://www.linkedin.com/in/sujal-almeida/',
       label: 'LinkedIn'
     },
     {
