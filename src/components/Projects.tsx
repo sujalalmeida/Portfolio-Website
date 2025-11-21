@@ -1,24 +1,23 @@
 import { useState } from 'react';
-import { ExternalLink, Github, Filter } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { ExternalLink, Github } from 'lucide-react';
+import TiltCard from './TiltCard';
+import './Projects.css';
 
 const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState('All');
 
   const projects = [
     {
-      title: 'Climate Sentinel',
-      description: 'AI-driven platform for climate and disaster risk assessment with 20% increased predictive accuracy. Features deforestation tracking, earthquake prediction, and weather forecasting with SMS alerts.',
+      title: 'PrivMed | Privacy-Preserving Video Surveillance',
+      description: 'Secure federated learning system for disease prediction using homomorphic encryption to protect patient data while aggregating model updates.',
       category: 'AI/ML',
-      date: 'Oct 2024',
-      tags: ['Python', 'Google Earth Engine', 'Streamlit', 'Machine Learning', 'GIS'],
+      date: 'Dec 2024 – Jan 2025',
+      tags: ['Python', 'React', 'Flask', 'Flower', 'CKKS'],
       highlights: [
-        '20% increase in predictive accuracy',
-        'Multi-hazard prediction models',
-        'Real-time SMS alert system',
-        'GIS visualization for renewable energy'
+        'Built secure federated learning system',
+        'Used homomorphic encryption for data protection',
+        'Aggregated encrypted model updates',
+        'Created React dashboard for administration'
       ],
       links: {
         github: '#',
@@ -26,17 +25,16 @@ const Projects = () => {
       }
     },
     {
-      title: 'Decentralized Ride-Sharing App',
-      description: 'Innovative blockchain-based ride-sharing platform with smart contracts for secure payments and Kleros integration for dispute resolution.',
-      category: 'Blockchain',
-      date: 'July 2024 - Present',
-      tags: ['React.js', 'Node.js', 'Smart Contracts', 'Web3.js', 'IPFS', 'Ethereum'],
+      title: 'CivicEcho | Crowdsourced Civic Issue Reporting',
+      description: 'Multimodal analysis system for rich incident reporting using automated complaint triage and AI verification to filter spam.',
+      category: 'AI/ML',
+      date: 'Jun 2025 – Present',
+      tags: ['React Native', 'Flask', 'MediaPipe', 'Hugging Face', 'Gemini'],
       highlights: [
-        'Private blockchain implementation',
-        'Smart contract payment system',
-        'Kleros dispute resolution',
-        'Web3 authentication',
-        'IPFS decentralized storage'
+        'Multimodal analysis (text, image, voice)',
+        'Automated complaint triage via agents',
+        'Integrated crowd and AI verification',
+        'Spam filtering and duplicate grouping'
       ],
       links: {
         github: '#',
@@ -44,17 +42,16 @@ const Projects = () => {
       }
     },
     {
-      title: 'Disaster Management System',
-      description: 'Comprehensive real-time disaster response platform featuring live climate data tracking, SOS alerts, resource allocation, and donation management.',
-      category: 'Web Development',
-      date: 'July 2023 - May 2024',
-      tags: ['Python', 'Django', 'Twilio API', 'Razorpay API', 'Real-time Data'],
+      title: 'AuraFitness | AI Fitness & Nutrition Assistant',
+      description: 'AI-powered fitness and nutrition app with food image analysis for macros and real-time workout coaching using computer vision.',
+      category: 'AI/ML',
+      date: 'Aug 2025 – Present',
+      tags: ['Python', 'Django', 'OpenCV', 'MediaPipe', 'LangChain'],
       highlights: [
-        'Real-time climate data tracking',
-        'Instant SOS alert system',
-        'Resource allocation optimization',
-        'Secure donation processing',
-        'Scalable Django architecture'
+        'Food image analysis with Gemini',
+        'Real-time workout coach with OpenCV',
+        'Fitness agent with LangChain + Ollama',
+        'Fitbit data integration'
       ],
       links: {
         github: '#',
@@ -65,8 +62,8 @@ const Projects = () => {
       title: 'RGR Sequence Analyzer',
       description: 'Web-based tool for fish DNA modification analysis, integrating NCBI database for genome comparison with comprehensive mismatch analysis.',
       category: 'Bioinformatics',
-      date: 'Oct 2024 - Present',
-      tags: ['React.js', 'Python', 'Django', 'NCBI API', 'Bioinformatics'],
+      date: 'Oct 2024 – Present',
+      tags: ['React.js', 'Python', 'Django', 'NCBI API'],
       highlights: [
         'NCBI database integration',
         'Advanced mismatch analysis',
@@ -80,112 +77,80 @@ const Projects = () => {
     }
   ];
 
-  const categories = ['All', 'AI/ML', 'Blockchain', 'Web Development', 'Bioinformatics'];
+  const categories = ['All', 'AI/ML', 'Bioinformatics'];
 
   const filteredProjects = selectedFilter === 'All' 
     ? projects 
     : projects.filter(project => project.category === selectedFilter);
 
   return (
-    <section id="projects" className="py-20 px-6 bg-gradient-to-b from-background to-muted/20">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            My <span className="text-gradient">Projects</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Showcasing innovative solutions across AI/ML, blockchain, and web development. 
-            Each project represents a unique challenge solved with cutting-edge technology.
-          </p>
-
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedFilter === category ? "default" : "outline"}
-                onClick={() => setSelectedFilter(category)}
-                className={`${
-                  selectedFilter === category 
-                    ? 'bg-gradient-primary text-primary-foreground' 
-                    : 'glass-card hover:emerald-glow'
-                } transition-all duration-300`}
-              >
-                <Filter className="mr-2 h-4 w-4" />
-                {category}
-              </Button>
-            ))}
-          </div>
+    <section id="projects" className="projects-section">
+      <div className="container">
+        <h2 className="section-title">
+          My <span className="text-gradient">Projects</span>
+        </h2>
+        
+        <div className="filter-container">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedFilter(category)}
+              className={`filter-btn ${selectedFilter === category ? 'active' : ''}`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="projects-grid">
           {filteredProjects.map((project, index) => (
-            <Card 
+            <TiltCard 
               key={project.title} 
-              className="glass-card p-8 hover:emerald-glow transition-all duration-500 group"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="glass-card project-card"
+              style={{ animation: `slide-up 0.5s ease forwards ${index * 0.1}s`, opacity: 0 }}
             >
-              <div className="flex justify-between items-start mb-4">
+              <div className="project-header">
                 <div>
-                  <h3 className="text-2xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                    <Badge variant="outline" className="text-primary border-primary">
-                      {project.category}
-                    </Badge>
-                    <span>•</span>
-                    <span>{project.date}</span>
+                  <h3 className="project-title">{project.title}</h3>
+                  <div className="project-meta">
+                    <span className="project-category">{project.category}</span>
+                    <span>• {project.date}</span>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="icon" className="glass-card hover:emerald-glow" asChild>
-                    <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="icon" className="glass-card hover:emerald-glow" asChild>
-                    <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
+                <div className="project-links">
+                  <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="icon-btn">
+                    <Github size={18} />
+                  </a>
+                  <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="icon-btn">
+                    <ExternalLink size={18} />
+                  </a>
                 </div>
               </div>
 
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                {project.description}
-              </p>
+              <p className="project-desc">{project.description}</p>
 
-              <div className="mb-6">
-                <h4 className="font-semibold mb-3 text-primary">Key Highlights:</h4>
-                <div className="space-y-2">
-                  {project.highlights.map((highlight) => (
-                    <div key={`${project.title}-hl-${highlight}`} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-muted-foreground">{highlight}</p>
+              <div style={{ marginBottom: '1rem' }}>
+                <h4 className="highlights-title">Key Highlights:</h4>
+                <div className="highlights-list">
+                  {project.highlights.map((highlight, idx) => (
+                    <div key={idx} className="highlight-item">
+                      <div className="highlight-dot"></div>
+                      <span>{highlight}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="tech-stack">
                 {project.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
+                  <span key={tag} className="tech-tag">
                     {tag}
-                  </Badge>
+                  </span>
                 ))}
               </div>
-            </Card>
+            </TiltCard>
           ))}
         </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-xl text-muted-foreground">
-              No projects found for the selected category.
-            </p>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Magnetic from './Magnetic';
+import './Layout.css';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,75 +33,61 @@ const Navigation = () => {
   };
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/80 backdrop-blur-xl border-b border-border' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <button
-            onClick={() => scrollToSection('#')}
-            className="text-2xl font-bold text-gradient hover:scale-105 transition-transform"
-          >
-            SA
-          </button>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container nav-container">
+        <button onClick={() => scrollToSection('#')} className="logo">
+          <span className="text-gradient">SA</span>
+        </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation */}
+        <div className="nav-links">
+          {navItems.map((item) => (
+            <Magnetic
+              key={item.name}
+              onClick={() => scrollToSection(item.href)}
+              className="nav-link"
+              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+            >
+              {item.name}
+            </Magnetic>
+          ))}
+          <Magnetic 
+            onClick={() => scrollToSection('#contact')}
+            className="btn btn-primary"
+            style={{ padding: '0.5rem 1.2rem', fontSize: '0.9rem' }}
+          >
+            Let's Talk
+          </Magnetic>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="mobile-menu-btn"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="mobile-menu">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary transition-colors relative group"
+                className="nav-link"
+                style={{ textAlign: 'left', padding: '0.5rem' }}
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
-          </div>
-
-          <div className="hidden md:block">
-            <Button 
+            <button 
               onClick={() => scrollToSection('#contact')}
-              className="btn-hero"
+              className="btn btn-primary"
+              style={{ width: '100%', marginTop: '0.5rem' }}
             >
               Let's Talk
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border">
-            <div className="px-6 py-4 space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left text-foreground hover:text-primary transition-colors py-2"
-                >
-                  {item.name}
-                </button>
-              ))}
-              <Button 
-                onClick={() => scrollToSection('#contact')}
-                className="w-full btn-hero mt-4"
-              >
-                Let's Talk
-              </Button>
-            </div>
+            </button>
           </div>
         )}
       </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import './CustomCursor.css';
 
 const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -63,7 +64,7 @@ const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 mix-blend-difference"
+        className="custom-cursor"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -79,7 +80,7 @@ const CustomCursor = () => {
       >
         <div className="relative">
           <motion.div
-            className="w-4 h-4 bg-primary rounded-full"
+            className="cursor-dot"
             animate={{
               scale: isHovering ? 2 : 1,
             }}
@@ -88,7 +89,7 @@ const CustomCursor = () => {
           
           {cursorText && (
             <motion.div
-              className="absolute top-6 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-2 py-1 rounded text-xs whitespace-nowrap"
+              className="cursor-text"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}

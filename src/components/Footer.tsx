@@ -1,5 +1,5 @@
-import { Heart, Github, Linkedin, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import './Layout.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,47 +37,43 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-t from-muted/20 to-background border-t border-border">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-grid">
           {/* Brand & Description */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gradient">Sujal Almeida</h3>
-            <p className="text-muted-foreground leading-relaxed">
+          <div className="footer-brand">
+            <h3 className="text-gradient" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Sujal Almeida</h3>
+            <p>
               AI/ML Developer and Data Scientist passionate about building intelligent solutions 
               that make a real-world impact. Always learning, always innovating.
             </p>
-            <div className="flex space-x-2">
+            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
               {socialLinks.map((social) => (
-                <Button
+                <a 
                   key={social.label}
-                  variant="outline"
-                  size="icon"
-                  className="glass-card hover:emerald-glow"
-                  asChild
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="icon-btn"
+                  style={{ width: '40px', height: '40px' }}
                 >
-                  <a 
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-4 w-4" />
-                  </a>
-                </Button>
+                  <social.icon size={18} />
+                </a>
               ))}
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Quick Links</h4>
-            <div className="space-y-2">
+          <div>
+            <h4 className="footer-title">Quick Links</h4>
+            <div className="footer-links">
               {quickLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="block text-muted-foreground hover:text-primary transition-colors"
+                  className="footer-link"
+                  style={{ textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                   {link.name}
                 </button>
@@ -86,40 +82,23 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Get In Touch</h4>
-            <div className="space-y-2">
-              <p className="text-muted-foreground">
-                <a 
-                  href="mailto:sujalalmeida13@gmail.com"
-                  className="hover:text-primary transition-colors"
-                >
-                  sujalameida13@gmail.com
-                </a>
-              </p>
-              <p className="text-muted-foreground">
-                <a 
-                  href="tel:+918390388652"
-                  className="hover:text-primary transition-colors"
-                >
-                  +91 8390388652
-                </a>
-              </p>
-              <p className="text-muted-foreground">Mumbai, India</p>
+          <div>
+            <h4 className="footer-title">Get In Touch</h4>
+            <div className="footer-links">
+              <a href="mailto:sujalalmeida13@gmail.com" className="footer-link">
+                sujalalmeida13@gmail.com
+              </a>
+              <a href="tel:+918390388652" className="footer-link">
+                +91 8390388652
+              </a>
+              <span style={{ color: 'var(--text-secondary)' }}>Mumbai, India</span>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-muted-foreground text-sm">
-           
-            </p>
-            <p className="flex items-center text-muted-foreground text-sm">
-              
-            </p>
-          </div>
+        <div className="footer-bottom">
+          <p>&copy; {currentYear} Sujal Almeida. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,51 @@
+:root {
+  /* Colors - Sirin Labs / Cyberpunk Aesthetic */
+  --primary: #00f0ff; /* Electric Cyan */
+  --primary-rgb: 0, 240, 255;
+  --primary-dark: #00a0aa;
+  --primary-light: #70ffff;
+  
+  --secondary: #0a2a2e; /* Dark Teal */
+  --accent: #cfb586; /* Bronze/Gold */
+  
+  --bg-color: #020c0f; /* Deepest Teal/Black */
+  --card-bg: rgba(10, 42, 46, 0.6); /* Glassy Dark Teal */
+  --card-border: rgba(0, 240, 255, 0.15);
+  
+  --text-color: #ffffff;
+  --text-secondary: #94a3b8;
+  
+  --gradient-primary: linear-gradient(135deg, #00f0ff 0%, #00a0aa 100%);
+  --gradient-dark: linear-gradient(135deg, #020c0f 0%, #0a2a2e 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(0, 240, 255, 0.4), transparent 70%);
+  
+  /* Typography */
+  --font-main: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}

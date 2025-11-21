@@ -9,13 +9,13 @@ const AuroraBackground = React.lazy(() => import('@/components/AuroraBackground'
 
 const Index = () => {
   return (
-    <div id="main-content" className="min-h-screen bg-background relative">
-      <Suspense fallback={<div className="absolute inset-0" />}>
+    <div id="main-content" style={{ minHeight: '100vh', position: 'relative', background: 'var(--bg-color)' }}>
+      <Suspense fallback={<div style={{ position: 'absolute', inset: 0 }} />}>
         <AuroraBackground />
       </Suspense>
       <Navigation />
       <Hero />
-      <Suspense fallback={<div className="max-w-6xl mx-auto px-6 py-20" />}>
+      <Suspense fallback={<div className="container" style={{ padding: '5rem 0' }} />}>
         <About />
         <Projects />
         <Contact />

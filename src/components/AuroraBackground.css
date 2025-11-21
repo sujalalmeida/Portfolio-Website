@@ -1,0 +1,55 @@
+.aurora-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--bg-color);
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+}
+
+.blob-1 {
+  width: 24rem;
+  height: 24rem;
+  top: 2.5rem;
+  left: 2.5rem;
+  background: linear-gradient(to bottom right, rgba(0, 240, 255, 0.15), rgba(10, 42, 46, 0.3), rgba(0, 160, 170, 0.1));
+}
+
+.blob-2 {
+  width: 20rem;
+  height: 20rem;
+  top: 33%;
+  right: 5rem;
+  background: linear-gradient(to bottom right, rgba(10, 42, 46, 0.3), rgba(0, 240, 255, 0.1), rgba(207, 181, 134, 0.1));
+}
+
+.blob-3 {
+  width: 18rem;
+  height: 18rem;
+  bottom: 5rem;
+  left: 25%;
+  background: linear-gradient(to bottom right, rgba(0, 160, 170, 0.15), rgba(0, 240, 255, 0.1), rgba(10, 42, 46, 0.3));
+}
+
+.blob-4 {
+  width: 15rem;
+  height: 15rem;
+  bottom: 33%;
+  right: 33%;
+  background: linear-gradient(to bottom right, rgba(0, 240, 255, 0.1), rgba(207, 181, 134, 0.1), rgba(0, 160, 170, 0.15));
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 50%;
+}
