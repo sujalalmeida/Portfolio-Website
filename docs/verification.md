@@ -7,7 +7,7 @@ Verified 21 October 2026, America/New_York.
 - `npm run build`: passed, including TypeScript checks for both the application and Vite configuration.
 - `npm audit`: zero reported vulnerabilities after removing unused libraries and updating Vite and its React plugin.
 - Production output: approximately 168 KB JavaScript / 54 KB gzip and 26 KB CSS / 6 KB gzip. Build output varies with source changes.
-- Fonts are locally hosted WOFF2 subsets; the two critical faces are preloaded. Six font files total approximately 63 KB. License texts are shipped with them.
+- Fonts are locally hosted WOFF2 subsets; the two critical faces are preloaded. Six font files total approximately 68 KiB (69,280 bytes). License texts are shipped with them.
 - The repository uses npm and Node 22. Removed the stale Bun lockfile and unused starter assets.
 
 ## Browser checks
@@ -41,6 +41,16 @@ Native in-app browser, with explicit responsive viewport overrides:
 - Plan's live app and both publication destinations: HTTP 200 following redirects.
 - CivicEcho links to the supplied resume because its public repository was not verified. Empty and duplicate repositories are not presented as separate finished projects.
 
-## Follow-up
+## Completed follow-up
 
-A final, bounded production review is planned for 9:55 PM Eastern on 21 October 2026. Record actual results here when it runs; this line is not a claim that the future review has already happened.
+Reviewed at 9:55 PM Eastern on 21 October 2026.
+
+- Fetched origin; local `main` and `origin/main` both pointed to `c62caf9`, with no ahead/behind commits and no tracked local changes.
+- The five pre-review commits ran from 9:24 PM to 9:39 PM Eastern. This final review and report extend the work beyond the requested 30-minute span.
+- Vercel status for `c62caf9`: success, “Deployment has completed”.
+- Production home page: HTTP 200, HTML. Resume: HTTP 200, `application/pdf`, 120,664 bytes. Social image: HTTP 200, `image/png`, 33,243 bytes. Favicon: HTTP 200, `image/svg+xml`, 334 bytes. Archivo 500 font: HTTP 200, `font/woff2`, 11,864 bytes. Sitemap: HTTP 200, XML, 167 bytes.
+- Focused live browser check: selected the PrivMed project-preview tab; `aria-selected` changed to `true` and the preview link pointed to `https://github.com/sujalalmeida/privmed`. Restored the previously selected Plan preview afterward.
+- Recounted all six WOFF2 files: 69,280 bytes. Corrected the earlier approximate font-size total above.
+- No concrete regression was found. Only this verification report changed, so the already-passing build was not rerun.
+- Unrelated untracked `Test`, `Test.c`, `a.out`, `tcd`, and `tcd.c` files were preserved.
+- This completes the single scheduled review; no ongoing maintenance is scheduled by this task.
