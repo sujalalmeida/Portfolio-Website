@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run check && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json"
   },
   "dependencies": {
     "lucide-react": "^0.462.0",
@@ -30,6 +31,6 @@
     "vite": "^8.3.5"
   },
   "engines": {
-    "node": ">=22.19.0 <23 || >=24.0.0"
+    "node": "22.x"
   }
 }

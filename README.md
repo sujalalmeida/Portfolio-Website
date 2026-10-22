@@ -14,8 +14,8 @@ npm run dev
 The local preview runs at `http://localhost:8080`.
 
 ```sh
-npm run build
-npx tsc --noEmit -p tsconfig.app.json
+npm run build # includes application and Vite-config type checks
+npm run check
 npm run preview
 ```
 
