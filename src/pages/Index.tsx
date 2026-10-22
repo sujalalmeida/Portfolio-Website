@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -11,11 +11,13 @@ import {
 } from "lucide-react";
 import { projects, profile, type Category } from "@/data/portfolio";
 import ProjectSketch from "@/components/ProjectSketch";
+import Wordmark from "@/components/Wordmark";
 
 const categories: Category[] = ["All work", "AI & privacy", "Applications"];
 const featured = projects.slice(0, 3);
 
 export default function Index() {
+  const menuButton = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState("along");
   const [category, setCategory] = useState<Category>("All work");
@@ -43,29 +45,36 @@ export default function Index() {
 
   return (
     <>
-      <header className="site-header wrap">
+      <header
+        className="site-header wrap"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && menuOpen) {
+            setMenuOpen(false);
+            menuButton.current?.focus();
+          }
+        }}
+      >
         <a className="identity" href="#home" aria-label="Sujal Almeida, home">
-          <span className="identity-mark">
-            sa<span>✳</span>
-          </span>
+          <Wordmark />
           <span>Sujal Almeida</span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#work">Work</a>
           <a href="#background">Background</a>
           <a href="#contact">
-            Say hello <ArrowUpRight size={15} />
+            Say hello <ArrowUpRight aria-hidden="true" size={15} />
           </a>
         </nav>
         <button
           className="menu-toggle"
+          ref={menuButton}
           type="button"
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           aria-label={menuOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <X /> : <Menu />}
+          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
         {menuOpen && (
           <nav
@@ -80,13 +89,13 @@ export default function Index() {
             ].map(([label, href]) => (
               <a key={href} href={href} onClick={() => setMenuOpen(false)}>
                 {label}
-                <ArrowUpRight size={18} />
+                <ArrowUpRight aria-hidden="true" size={18} />
               </a>
             ))}
           </nav>
         )}
       </header>
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <section className="hero wrap" id="home" aria-labelledby="hero-title">
           <div className="hero-intro">
             <div>
@@ -114,7 +123,7 @@ export default function Index() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Read my resume <ArrowUpRight size={17} />
+                Read my resume <ArrowUpRight aria-hidden="true" size={17} />
               </a>
             </div>
           </div>
@@ -130,6 +139,7 @@ export default function Index() {
                   type="button"
                   role="tab"
                   id={`tab-${project.id}`}
+                  aria-label={`${project.name} project preview`}
                   aria-controls="project-preview"
                   aria-selected={activeProject === project.id}
                   tabIndex={activeProject === project.id ? 0 : -1}
@@ -184,8 +194,13 @@ export default function Index() {
                   <strong>{currentProject.name}</strong> /{" "}
                   {currentProject.subtitle}
                 </span>
-                <a href={currentProject.href} target="_blank" rel="noreferrer">
-                  View project <ArrowUpRight size={16} />
+                <a
+                  href={currentProject.href}
+                  aria-label={`View ${currentProject.name} project on GitHub`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View project <ArrowUpRight aria-hidden="true" size={16} />
                 </a>
               </div>
             </div>
@@ -193,7 +208,7 @@ export default function Index() {
           <div className="hero-footnote">
             <span>Thoughtful systems. Practical outcomes.</span>
             <a href="#work">
-              Explore selected work <ArrowDown size={15} />
+              Explore selected work <ArrowDown aria-hidden="true" size={15} />
             </a>
           </div>
         </section>
@@ -201,6 +216,7 @@ export default function Index() {
         <section
           className="work-section wrap"
           id="work"
+          tabIndex={-1}
           aria-labelledby="work-title"
         >
           <div className="section-heading">
@@ -253,11 +269,15 @@ export default function Index() {
                   category === "All work" || project.category === category,
               )
               .map((project) => (
-                <article className="project-card" key={project.id}>
+                <article
+                  className="project-card"
+                  key={project.id}
+                  aria-labelledby={`project-${project.id}`}
+                >
                   <ProjectSketch kind={project.id} compact />
                   <div className="project-content">
                     <div className="project-title">
-                      <h3>{project.name}</h3>
+                      <h3 id={`project-${project.id}`}>{project.name}</h3>
                       <span>{project.category}</span>
                     </div>
                     <p>{project.description}</p>
@@ -270,7 +290,7 @@ export default function Index() {
                       ))}
                     </ul>
                     <details>
-                      <summary>
+                      <summary aria-label={`Behind the build: ${project.name}`}>
                         Behind the build <PlusIcon />
                       </summary>
                       <p>{project.detail}</p>
@@ -279,21 +299,23 @@ export default function Index() {
                       <a
                         className="text-link"
                         href={project.href}
+                        aria-label={`${project.linkLabel}: ${project.name}`}
                         target="_blank"
                         rel="noreferrer"
                       >
                         {project.linkLabel}
-                        <ArrowUpRight size={16} />
+                        <ArrowUpRight aria-hidden="true" size={16} />
                       </a>
                       {project.demo && (
                         <a
                           className="text-link"
                           href={project.demo}
+                          aria-label={`Open ${project.name} app`}
                           target="_blank"
                           rel="noreferrer"
                         >
                           Open app
-                          <ArrowUpRight size={16} />
+                          <ArrowUpRight aria-hidden="true" size={16} />
                         </a>
                       )}
                     </div>
@@ -315,7 +337,7 @@ export default function Index() {
               target="_blank"
               rel="noreferrer"
             >
-              All repositories <Github size={18} />
+              All repositories <Github aria-hidden="true" size={18} />
             </a>
           </div>
         </section>
@@ -323,6 +345,7 @@ export default function Index() {
         <section
           className="background-section"
           id="background"
+          tabIndex={-1}
           aria-labelledby="background-title"
         >
           <div className="wrap">
@@ -431,7 +454,7 @@ export default function Index() {
                       Engineering and Science
                     </p>
                   </div>
-                  <ArrowUpRight size={22} />
+                  <ArrowUpRight aria-hidden="true" size={22} />
                 </a>
                 <a
                   href="https://ijca.phdfocus.com/archives/volume187/issue43/harnessing-generative-ai-for-precision-chemistry-autonomous-molecular-design-retrosynthetic-planning-and-validated-discovery-pipeline/"
@@ -443,7 +466,7 @@ export default function Index() {
                     <h3>Harnessing Generative AI for Precision Chemistry</h3>
                     <p>International Journal of Computer Applications</p>
                   </div>
-                  <ArrowUpRight size={22} />
+                  <ArrowUpRight aria-hidden="true" size={22} />
                 </a>
               </div>
             </div>
@@ -453,8 +476,8 @@ export default function Index() {
                 <div>
                   <h4>Languages & applications</h4>
                   <p>
-                    Python, SQL, Java, C++, TypeScript, React, React Native,
-                    Django, Flask
+                    Python, SQL, Java, C++, Swift, TypeScript, React, React
+                    Native, Django, Flask
                   </p>
                 </div>
                 <div>
@@ -478,6 +501,7 @@ export default function Index() {
         <section
           className="contact-section wrap"
           id="contact"
+          tabIndex={-1}
           aria-labelledby="contact-title"
         >
           <p className="section-kicker">
@@ -500,7 +524,7 @@ export default function Index() {
           <div className="contact-actions">
             <a className="email-link" href={`mailto:${profile.email}`}>
               {profile.email}
-              <ArrowUpRight />
+              <ArrowUpRight aria-hidden="true" />
             </a>
             <button
               className="copy-button"
@@ -508,7 +532,11 @@ export default function Index() {
               onClick={copyEmail}
               aria-label={copied ? "Email copied" : "Copy email address"}
             >
-              {copied ? <Check size={18} /> : <Copy size={18} />}
+              {copied ? (
+                <Check aria-hidden="true" size={18} />
+              ) : (
+                <Copy aria-hidden="true" size={18} />
+              )}
             </button>
             <span className="copy-feedback" role="status">
               {copied
@@ -521,19 +549,19 @@ export default function Index() {
         </section>
       </main>
       <footer className="site-footer wrap">
-        <a className="identity-mark" href="#home" aria-label="Back to top">
-          sa<span>✳</span>
+        <a className="wordmark-link" href="#home" aria-label="Back to top">
+          <Wordmark />
         </a>
         <p>© {new Date().getFullYear()} Sujal Almeida</p>
         <div>
           <a href={profile.github} target="_blank" rel="noreferrer">
-            GitHub <Github size={15} />
+            GitHub <Github aria-hidden="true" size={15} />
           </a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn <Linkedin size={15} />
+            LinkedIn <Linkedin aria-hidden="true" size={15} />
           </a>
           <a href={profile.resume} target="_blank" rel="noreferrer">
-            Resume <ArrowUpRight size={15} />
+            Resume <ArrowUpRight aria-hidden="true" size={15} />
           </a>
         </div>
       </footer>

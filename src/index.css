@@ -87,7 +87,7 @@ summary {
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible,
-[tabindex]:focus-visible {
+[role="tabpanel"]:focus-visible {
   outline: 3px solid var(--red);
   outline-offset: 5px;
 }
@@ -178,7 +178,7 @@ svg {
   display: inline-flex;
   align-items: flex-start;
 }
-.identity-mark > span {
+.identity-mark > svg {
   font-size: 28px;
   color: var(--red);
   letter-spacing: 0;
@@ -581,11 +581,11 @@ svg {
   letter-spacing: -1px;
 }
 .project-title > span {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .project-content > p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   max-width: 55ch;
 }
@@ -601,7 +601,7 @@ svg {
   padding: 5px 9px;
   border: 1px solid var(--line);
   border-radius: 3px;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
 }
 details {
@@ -640,7 +640,7 @@ summary:hover {
   justify-content: space-between;
 }
 .project-links .text-link {
-  font-size: 12px;
+  font-size: 13px;
 }
 .more-work {
   border-top: 1px solid var(--line);
@@ -658,7 +658,7 @@ summary:hover {
   margin-bottom: 7px;
 }
 .more-work p {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
 }
 .more-work .text-link {
@@ -1164,7 +1164,7 @@ summary:hover {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   padding-top: 3px;
 }
@@ -1180,12 +1180,12 @@ summary:hover {
   margin: 8px 0 17px;
 }
 .experience-item p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 .experience-item .experience-note {
   margin-top: 12px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .outcomes {
   display: flex;
@@ -1219,7 +1219,7 @@ summary:hover {
 }
 .education-year,
 .publication-type {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .education-grid h3 {
@@ -1230,13 +1230,13 @@ summary:hover {
   margin: 15px 0 8px;
 }
 .education-grid p {
-  font-size: 13px;
+  font-size: 14px;
 }
 .education-grid .muted {
-  font-size: 11px;
+  font-size: 12px;
 }
 .education-grid .education-detail {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
   margin-top: 18px;
 }
@@ -1257,7 +1257,7 @@ summary:hover {
 }
 .research-list p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 .research-list svg {
   color: var(--red);
@@ -1275,7 +1275,7 @@ summary:hover {
   margin-bottom: 10px;
 }
 .toolkit-grid p {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted);
 }
 .contact-section {
@@ -1296,7 +1296,7 @@ summary:hover {
   color: var(--green);
 }
 .contact-heading > p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   max-width: 265px;
   padding-bottom: 6px;
@@ -1627,7 +1627,7 @@ summary:hover {
     font-size: 38px;
   }
   .section-heading > p {
-    font-size: 13px;
+    font-size: 14px;
   }
   .section-kicker {
     font-size: 12px;
@@ -1660,7 +1660,7 @@ summary:hover {
     font-size: 24px;
   }
   .project-content > p {
-    font-size: 13px;
+    font-size: 15px;
   }
   .sketch-compact .workspace-windows {
     width: 93%;
@@ -1724,7 +1724,7 @@ summary:hover {
     gap: 12px;
   }
   .more-work p {
-    font-size: 12px;
+    font-size: 13px;
   }
   .background-section {
     padding: 65px 0;
@@ -1750,7 +1750,7 @@ summary:hover {
   .experience-meta {
     flex-direction: row;
     justify-content: space-between;
-    font-size: 10px;
+    font-size: 12px;
   }
   .experience-item h3 {
     font-size: 22px;
@@ -1791,7 +1791,7 @@ summary:hover {
     gap: 23px;
   }
   .toolkit-grid p {
-    font-size: 12px;
+    font-size: 14px;
     max-width: 47ch;
   }
   .contact-section {
@@ -1807,7 +1807,7 @@ summary:hover {
     font-size: 59px;
   }
   .contact-heading > p {
-    font-size: 13px;
+    font-size: 15px;
     max-width: 310px;
   }
   .contact-heading > p > br {
@@ -1915,4 +1915,23 @@ summary:hover {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Keep quiet text links easy to reach on touch screens. */
+.hero-footnote a,
+.workspace-caption a {
+  min-height: 44px;
+}
+.wordmark-link {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+}
+.identity-mark > svg {
+  color: var(--red);
+  margin: 0 0 0 5px;
+}
+button:active {
+  opacity: 0.78;
 }
